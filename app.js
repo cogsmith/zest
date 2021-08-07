@@ -36,12 +36,18 @@ App.InitData = function () {
 }
 
 App.Init = function () {
+    if (!App.Args.test) { App.Args.test = []; }
+    else if (!Array.isArray(App.Args.test)) { App.Args.test = [App.Args.test]; }
+
+    if (App.Args._.length > 2) { App.Args.test = App.Args.test.concat(App.Args._.slice(2)); }
+    if (App.Args.test.length == 0) { delete App.Args.test; }
 }
 
 App.InitDone = function () {
 }
 
 App.Main = async function () {
+    //LOG.WARN('App.Args', App.Args);
     await Zest.AppMain(App);
 }
 

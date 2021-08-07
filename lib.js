@@ -112,7 +112,8 @@ Zest.AppMain = async function (App) {
     else {
         let t = App.Args.test;
         if (NODE.fs.existsSync(t)) {
-            delete require.cache[require.resolve('./' + t.replace('.js', ''))];
+            let dir = process.cwd();
+            delete require.cache[require.resolve(t.replace('.js', ''))];
             mocha.addFile(t);
         }
     }

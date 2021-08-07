@@ -1,8 +1,10 @@
 {
-    "bin": {
-        "zest": "./app.js"
-    },
-    "dependencies": {
-        "@cogsmith/xt": "^1.0.167"
-    }
+  "bin": {
+    "zest": "./app.js"
+  },
+  "dependencies": {
+    "@cogsmith/xt": "^1.0.167"
+  },
+  "version": "0.0.1",
+  "versiontaglast": "0.0.1"
 }

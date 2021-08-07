@@ -1,0 +1,7 @@
+.env
+.env.*
+node_modules/
+.gitattributes
+.github/
+bin/
+Dockerfile

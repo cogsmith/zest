@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const XT = require('@cogsmith/xt').Init();
 const App = XT.App; const LOG = XT.LOG;
 

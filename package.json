@@ -5,6 +5,6 @@
   "dependencies": {
     "@cogsmith/xt": "^1.0.167"
   },
-  "version": "0.0.1",
+  "version": "0.0.2-dev",
   "versiontaglast": "0.0.1"
 }

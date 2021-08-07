@@ -1,6 +1,6 @@
 {
     "main": "app.js",
-    "bin": "/app.js",
+    "bin": "app.js",
     "dependencies": {
         "@cogsmith/xt": "*"
     },

@@ -1,17 +1,17 @@
 {
-    "main": "app.js",
-    "bin": {
-        "zest": "./app.js"
-    },
-    "dependencies": {
-        "@cogsmith/xt": "*"
-    },
-    "npmpublish": true,
-    "license": "GPLv3",
-    "version": "0.0.3-dev",
-    "name": "@cogsmith/zest",
-    "nametag": "ZEST",
-    "namelong": "ZEST",
-    "description": "✔️ Zestful Testing ✔️",
-    "versiontaglast": "0.0.2"
+  "main": "app.js",
+  "bin": {
+    "zest": "./app.js"
+  },
+  "dependencies": {
+    "@cogsmith/xt": "*"
+  },
+  "npmpublish": true,
+  "license": "GPLv3",
+  "version": "0.0.3",
+  "name": "@cogsmith/zest",
+  "nametag": "ZEST",
+  "namelong": "ZEST",
+  "description": "✔️ Zestful Testing ✔️",
+  "versiontaglast": "0.0.3"
 }

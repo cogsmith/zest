@@ -3,6 +3,6 @@
         "zest": "./app.js"
     },
     "dependencies": {
-        "@cogsmith/xt": "^1.0.167"
+        "@cogsmith/xt": "*"
     }
 }

@@ -48,9 +48,9 @@ App.InitDone = function () {
 
 App.Main = async function () {
     //LOG.WARN('App.Args', App.Args);
-    LOG.WARN('', { PCWD: process.cwd(), DIRNAME: __dirname });
-    LOG.WARN(XT.Meta.Full);
-    LOG.WARN(App.Meta.Full);
+    //LOG.WARN('', { PCWD: process.cwd(), DIRNAME: __dirname });
+    //LOG.WARN(XT.Meta.Full);
+    //LOG.WARN(App.Meta.Full);
 
     setTimeout(async () => { await Zest.AppMain(App); }, 2500);
 }

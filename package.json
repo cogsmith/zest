@@ -2,7 +2,7 @@
   "main": "lib.js",
   "bin": "app.js",
   "dependencies": {
-    "@cogsmith/xt": "^1.0.170",
+    "@cogsmith/xt": "^1.0.171",
     "chai": "^4.3.4",
     "mocha": "^9.0.3",
     "supertest": "^6.1.4"

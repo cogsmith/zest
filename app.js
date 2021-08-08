@@ -2,7 +2,7 @@
 
 const XT = require('@cogsmith/xt').Init();
 const App = XT.App; const LOG = XT.LOG;
-XT.Log.SetLevel('warn');
+//XT.Log.SetLevel('warn');
 
 //
 
@@ -21,7 +21,7 @@ LIB.chalk = require('chalk'); const chalk = LIB.chalk;
 //
 
 App.InitLog = function () {
-    XT.Log.SetLevel('warn');
+    //XT.Log.SetLevel('warn');
 }
 
 App.InitArgs = function () {
@@ -48,7 +48,11 @@ App.InitDone = function () {
 
 App.Main = async function () {
     //LOG.WARN('App.Args', App.Args);
-    await Zest.AppMain(App);
+    LOG.WARN('', { PCWD: process.cwd(), DIRNAME: __dirname });
+    LOG.WARN(XT.Meta.Full);
+    LOG.WARN(App.Meta.Full);
+
+    setTimeout(async () => { await Zest.AppMain(App); }, 2500);
 }
 
 App.Run();

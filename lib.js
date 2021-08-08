@@ -90,7 +90,7 @@ Zest.WaitForPort = (port) => new Promise(async (resolve, reject) => {
 })
 
 Zest.AppMain = async function (App) {
-    console.clear();
+    //console.clear();
 
     //console.log('AppArgs', App.Args);
 
@@ -244,7 +244,6 @@ class MyReporter {
 }
 
 mocha.utils.inherits(MyReporter, mocha.reporters.Base);
-
 
 //
 

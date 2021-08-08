@@ -9,6 +9,6 @@
 ---
 
 <pre>
-✔️ Zest can run plain mocha tests
-✔️ Mocha can run fancy zest tests
+    ✔️ Zest can run plain mocha tests!
+    ✔️ Mocha can run fancy zest tests!
 </pre>

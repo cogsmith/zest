@@ -10,6 +10,7 @@ NODE.http = require('http');
 const LIB = {};
 LIB.mocha = require('mocha'); const mocha = LIB.mocha;
 LIB.chalk = require('chalk'); const chalk = LIB.chalk;
+LIB.glob = require('glob'); const glob = LIB.glob;
 
 //
 
@@ -101,15 +102,29 @@ Zest.AppMain = async function (App) {
     let mocha = new LIB.mocha({ reporter: 'spec', ui: 'bdd', timeout: 10000 });
     mocha.reporter(MyReporter);
 
-    if (!Array.isArray(App.Args.test)) { App.Args.test = [App.Args.test]; }
+    //
+
+    if (!App.Args.test) { App.Args.test = []; } else if (!Array.isArray(App.Args.test)) { App.Args.test = [App.Args.test]; }
+    if (App.Args._.length > 2) { App.Args.test = App.Args.test.concat(App.Args._.slice(2)); }
+    if (App.Args.test.length == 0) { App.Args.test = ['test']; }
+
+    //
+
     for (let t of App.Args.test) {
         if (NODE.fs.existsSync(t)) {
             let dir = process.cwd();
             let js = dir + '/' + t;
             if (!NODE.fs.existsSync(js)) { js = t; }
             if (!NODE.fs.existsSync(js)) { continue; }
-            delete require.cache[require.resolve(js.replace('.js', ''))];
-            mocha.addFile(js);
+            if (NODE.fs.lstatSync(js).isDirectory()) {
+                for (let f of glob.sync(js + '/**/*.js')) {
+                    console.log(f);
+                    App.Args.test.push(f);
+                }
+            } else {
+                delete require.cache[require.resolve(js.replace('.js', ''))];
+                mocha.addFile(js);
+            }
         }
     }
 

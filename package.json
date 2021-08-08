@@ -9,10 +9,10 @@
   },
   "npmpublish": true,
   "license": "GPLv3",
-  "version": "0.0.17-dev",
+  "version": "0.0.17",
   "name": "@cogsmith/zest",
   "nametag": "ZEST",
   "namelong": "ZEST",
   "description": "✔️ Zestful Testing ✔️",
-  "versiontaglast": "0.0.16"
+  "versiontaglast": "0.0.17"
 }

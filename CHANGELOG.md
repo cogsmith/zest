@@ -1,5 +1,18 @@
 <code>
 
+# [0.0.14](https://github.com/cogsmith/zest/compare/0.0.14...main) @ [2021-08-07](https://github.com/cogsmith/zest/releases/tag/0.0.14) 
+
+## DIFF
+- [4 COMMITS SINCE LAST TAG = 0.0.13](https://github.com/cogsmith/zest/compare/0.0.13...0.0.14)
+
+## COMMITS
+- Merge branch 'main' of https://github.com/cogsmith/zest
+
+</code>
+
+---
+<code>
+
 # [0.0.13](https://github.com/cogsmith/zest/compare/0.0.13...main) @ [2021-08-07](https://github.com/cogsmith/zest/releases/tag/0.0.13) 
 
 ## DIFF

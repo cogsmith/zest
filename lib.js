@@ -54,7 +54,7 @@ Zest.Test = function () {
     Zest.DB.Tests[id] = test;
 
     describe(test.ID, function () {
-        describe('Imit Tests', function () {
+        describe('Init Tests', function () {
             if (test.Web && test.Web.URL) {
                 it('Fetch Data', async function () {
                     res = await web.post(test.Web.URL).send(test.Web.Input).expect(200);
@@ -102,11 +102,15 @@ Zest.AppMain = async function (App) {
     mocha.reporter(MyReporter);
 
     if (!Array.isArray(App.Args.test)) { App.Args.test = [App.Args.test]; }
-    let t = App.Args.test;
-    if (NODE.fs.existsSync(t)) {
-        let dir = process.cwd();
-        delete require.cache[require.resolve(t.replace('.js', ''))];
-        mocha.addFile(t);
+    for (let t of App.Args.test) {
+        if (NODE.fs.existsSync(t)) {
+            let dir = process.cwd();
+            let js = dir + '/' + t;
+            if (!NODE.fs.existsSync(js)) { js = t; }
+            if (!NODE.fs.existsSync(js)) { continue; }
+            delete require.cache[require.resolve(js.replace('.js', ''))];
+            mocha.addFile(js);
+        }
     }
 
     //mocha.addFile('test/test1.js');

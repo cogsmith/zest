@@ -117,10 +117,7 @@ Zest.AppMain = async function (App) {
             if (!NODE.fs.existsSync(js)) { js = t; }
             if (!NODE.fs.existsSync(js)) { continue; }
             if (NODE.fs.lstatSync(js).isDirectory()) {
-                for (let f of glob.sync(js + '/**/*.js')) {
-                    console.log(f);
-                    App.Args.test.push(f);
-                }
+                for (let f of glob.sync(js + '/**/*.js')) { App.Args.test.push(f); }
             } else {
                 delete require.cache[require.resolve(js.replace('.js', ''))];
                 mocha.addFile(js);

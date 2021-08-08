@@ -101,21 +101,12 @@ Zest.AppMain = async function (App) {
     let mocha = new LIB.mocha({ reporter: 'spec', ui: 'bdd', timeout: 10000 });
     mocha.reporter(MyReporter);
 
-    if (Array.isArray(App.Args.test)) {
-        for (let t of App.Args.test) {
-            if (NODE.fs.existsSync(t)) {
-                delete require.cache[require.resolve('./' + t.replace('.js', ''))];
-                mocha.addFile(t);
-            }
-        }
-    }
-    else {
-        let t = App.Args.test;
-        if (NODE.fs.existsSync(t)) {
-            let dir = process.cwd();
-            delete require.cache[require.resolve(t.replace('.js', ''))];
-            mocha.addFile(t);
-        }
+    if (!Array.isArray(App.Args.test)) { App.Args.test = [App.Args.test]; }
+    let t = App.Args.test;
+    if (NODE.fs.existsSync(t)) {
+        let dir = process.cwd();
+        delete require.cache[require.resolve(t.replace('.js', ''))];
+        mocha.addFile(t);
     }
 
     //mocha.addFile('test/test1.js');

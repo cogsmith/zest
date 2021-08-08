@@ -1,18 +1,18 @@
 {
-    "main": "lib.js",
-    "bin": "app.js",
-    "dependencies": {
-        "@cogsmith/xt": "^1.0.178",
-        "chai": "^4.3.4",
-        "mocha": "^9.0.3",
-        "supertest": "^6.1.4"
-    },
-    "npmpublish": true,
-    "license": "GPLv3",
-    "version": "0.0.15-dev",
-    "name": "@cogsmith/zest",
-    "nametag": "ZEST",
-    "namelong": "ZEST",
-    "description": "✔️ Zestful Testing ✔️",
-    "versiontaglast": "0.0.14"
+  "main": "lib.js",
+  "bin": "app.js",
+  "dependencies": {
+    "@cogsmith/xt": "^1.0.178",
+    "chai": "^4.3.4",
+    "mocha": "^9.0.3",
+    "supertest": "^6.1.4"
+  },
+  "npmpublish": true,
+  "license": "GPLv3",
+  "version": "0.0.15",
+  "name": "@cogsmith/zest",
+  "nametag": "ZEST",
+  "namelong": "ZEST",
+  "description": "✔️ Zestful Testing ✔️",
+  "versiontaglast": "0.0.15"
 }

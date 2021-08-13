@@ -113,7 +113,7 @@ Zest.AppMain = async function (App) {
     //LOG.WARN('Z');
     //LOG.WARN('ARGS', App.Args);
 
-    let mocha = new LIB.mocha({ reporter: 'spec', ui: 'bdd', timeout: 10000 });
+    let mocha = new LIBS.mocha({ reporter: 'spec', ui: 'bdd', timeout: 10000 });
     mocha.reporter(MyReporter);
 
     //

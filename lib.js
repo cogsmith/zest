@@ -7,14 +7,24 @@ const NODE = {};
 NODE.fs = require('fs');
 NODE.http = require('http');
 
-const LIB = {};
-LIB.mocha = require('mocha'); const mocha = LIB.mocha;
-LIB.chalk = require('chalk'); const chalk = LIB.chalk;
-LIB.glob = require('glob'); const glob = LIB.glob;
+const LIBS = {};
+LIBS.mocha = require('mocha'); const mocha = LIBS.mocha;
+LIBS.chalk = require('chalk'); const chalk = LIBS.chalk;
+LIBS.glob = require('glob'); const glob = LIBS.glob;
+LIBS.supertest = require('supertest'); const web = LIBS.supertest('');
+LIBS.chai = require('chai'); const should = LIBS.chai.should();
 
 //
 
-const web = require("supertest")('');
+const {
+    EVENT_RUN_BEGIN,
+    EVENT_RUN_END,
+    EVENT_TEST_FAIL,
+    EVENT_TEST_PASS,
+    EVENT_SUITE_BEGIN,
+    EVENT_SUITE_END,
+    EVENT_TEST_PENDING
+} = LIB.mocha.Runner.constants;
 
 //
 
@@ -64,7 +74,11 @@ Zest.Test = function () {
         })
 
         describe('Data Validation', function () {
-            if (test.Web && test.Web.Output) { it(test.ID, async function () { res.body.should.eql(test.Web.Output); }); }
+            if (test.Web && test.Web.Output) {
+                it(test.ID, async function () {
+                    res.body.should.eql(test.Web.Output);
+                });
+            }
         })
 
         describe('Test Cases', function () {

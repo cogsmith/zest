@@ -1,15 +1,16 @@
 const assert = require('assert');
 const supertest = require('supertest');
-const ff = require('fastify')({ logger: 0 });
+let ff = 0;
 
 const Mock = {};
 Mock.Host = process.env.HOST || 'localhost';
 Mock.Port = process.env.PORT || 8080;
 Mock.URL = 'http://' + Mock.Host.trim() + ':' + Mock.Port.toString().trim();
 Mock.Init = async () => { await Mock.Fixture(); };
-Mock.Done = async () => { ff.close(); };
+Mock.Done = async () => { await ff.close(); };
 Mock.Reset = async () => { await Mock.Done(); await Mock.Init(); };
 Mock.Fixture = async () => {
+    ff = require('fastify')({ logger: 0 });
     ff.get('/', async (req, rep) => { return 'HELLOWORLD'; });
     ff.get('/404', async (req, rep) => { rep.status(404).send('404'); });
     ff.get('/status/200', async (req, rep) => { rep.status(200).send('200'); });
@@ -33,10 +34,6 @@ describe('Test Suite', () => {
         it('HELLOWORLD', async () => { await web.get('/').expect('HELLOWORLD'); });
     });
 });
-
-console.log(process.env.HOST);
-console.log(process.env.PORT);
-console.log('=' + Mock.URL + '=');
 
 // CMD /C "SET HOST=google.com & SET PORT=80 & npx -y @cogsmith/zest"
 // CMD /C "SET HOST=localhost & SET PORT=8080 & npx -y @cogsmith/zest"

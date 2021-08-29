@@ -1,7 +1,7 @@
-// DEFAULT MOCHA SPEC REPORTER + CHANGES: SHOW FULL TEST FILE PATH, COLOR TWEAKS
+// DEFAULT MOCHA SPEC REPORTER CODE + CHANGES: SHOW FULL TEST FILE PATH, COLOR TWEAKS
 
-const mocha = require('mocha'); const { EVENT_RUN_BEGIN, EVENT_RUN_END, EVENT_TEST_FAIL, EVENT_TEST_PASS, EVENT_SUITE_BEGIN, EVENT_SUITE_END, EVENT_TEST_PENDING } = mocha.Runner.constants;
 const chalk = require('chalk');
+const mocha = require('mocha'); const { EVENT_RUN_BEGIN, EVENT_RUN_END, EVENT_TEST_FAIL, EVENT_TEST_PASS, EVENT_SUITE_BEGIN, EVENT_SUITE_END, EVENT_TEST_PENDING } = mocha.Runner.constants;
 
 class ZestReporter {
     constructor(runner, options) {

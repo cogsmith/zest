@@ -226,7 +226,7 @@ Zest.DoTest = function (testlist) {
 
     for (let js of testlist) {
         if (js[0] != '.' && js[0] != '/' && !js.includes(':')) { js = './' + js; }
-        try { delete require.cache[require.resolve(js.replace('.js', ''))]; } catch (ex) { }
+        try { delete require.cache[require.resolve(js.replace('.js', ''))]; } catch (ex) { console.error(ex); }
         mocha.addFile(js);
     }
 
@@ -250,6 +250,7 @@ Zest.DoTest = function (testlist) {
     });
 
     Zest.UI.Head.focus();
+    setInterval(() => { try { Zest.UI.Head.focus(); } catch (ex) { } }, 100);
     setTimeout(() => { Zest.TestRunning = false; Zest.UI.Head.focus(); }, 250);
 }
 

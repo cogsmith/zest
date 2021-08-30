@@ -133,10 +133,12 @@ Zest.InitUI = function () {
     const body = grid.set(0, 3, 10, 7, blessed.box, { style: { bg: '#111111' }, content: '' });
     head.focus();
     head.on('select', (z, i) => {
+        if (Zest.TestRunning) { return; }
         foot.content = z.content + "\n";
-        screen.render();
         let test = i; if (i > 0) { test = z.content; };
+        Zest.UI.Head.focus();
         Zest.DoTest(test);
+        Zest.UI.Head.focus();
     });
     screen.render();
 
@@ -208,7 +210,9 @@ Zest.GetTestList = function (arglist) {
     return list;
 }
 
+Zest.TestRunning = false;
 Zest.DoTest = function (testlist) {
+    if (Zest.TestRunning) { return; }; Zest.TestRunning = true;
     if (testlist == 0 || testlist == '0') { testlist = Zest.TestList; }
     //if (testlist == 0 || testlist == '0') { testlist = Zest.GetTestList([process.cwd() + '/' + 'test']); }
     if (!Array.isArray(testlist)) { testlist = [testlist]; }
@@ -245,6 +249,8 @@ Zest.DoTest = function (testlist) {
         mocha.unloadFiles();
     });
 
+    Zest.UI.Head.focus();
+    setTimeout(() => { Zest.TestRunning = false; Zest.UI.Head.focus(); }, 250);
 }
 
 

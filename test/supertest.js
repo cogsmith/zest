@@ -15,6 +15,7 @@ Mock.Fixture = async () => {
     ff.get('/404', async (req, rep) => { rep.status(404).send('404'); });
     ff.get('/status/200', async (req, rep) => { rep.status(200).send('200'); });
     ff.get('/status/400', async (req, rep) => { rep.status(400).send('400'); });
+    ff.post('/post', async (req, rep) => { rep.status(200).send('POST'); });
     await ff.listen(Mock.Port);
 };
 
@@ -32,6 +33,7 @@ describe('Test Suite', () => {
     });
     describe('Response Body', () => {
         it('HELLOWORLD', async () => { await web.get('/').expect('HELLOWORLD'); });
+        it('POST', async () => { await web.post('/post').expect(200); });
     });
 });
 

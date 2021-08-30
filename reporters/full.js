@@ -1,5 +1,6 @@
 // DEFAULT MOCHA SPEC REPORTER CODE + CHANGES: SHOW FULL TEST FILE PATH, COLOR TWEAKS
 
+const nodepath = require('path');
 const util = require('util');
 const chalk = require('chalk');
 const mocha = require('mocha'); const { EVENT_RUN_BEGIN, EVENT_RUN_END, EVENT_TEST_FAIL, EVENT_TEST_PASS, EVENT_SUITE_BEGIN, EVENT_SUITE_END, EVENT_TEST_PENDING } = mocha.Runner.constants;
@@ -47,7 +48,7 @@ class ZestReporter {
             if (suite.file && lastfile != suite.file) {
                 if (1) {
                     //BaseConsoleLog(); // BaseConsoleLog();
-                    BaseConsoleLog(chalk.yellow(suite.file));
+                    BaseConsoleLog(chalk.yellow(nodepath.basename(suite.file)));
                     BaseConsoleLog();
                 }
                 lastfile = suite.file;

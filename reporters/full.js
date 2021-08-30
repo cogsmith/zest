@@ -1,10 +1,30 @@
 // DEFAULT MOCHA SPEC REPORTER CODE + CHANGES: SHOW FULL TEST FILE PATH, COLOR TWEAKS
 
+const util = require('util');
 const chalk = require('chalk');
 const mocha = require('mocha'); const { EVENT_RUN_BEGIN, EVENT_RUN_END, EVENT_TEST_FAIL, EVENT_TEST_PASS, EVENT_SUITE_BEGIN, EVENT_SUITE_END, EVENT_TEST_PENDING } = mocha.Runner.constants;
 
+
 class ZestReporter {
     constructor(runner, options) {
+        let self = this;
+
+        runner.LOGOUT = '';
+        runner.SUMMARY = '';
+
+        runner.LOG = function () {
+            let msg = util.format(...arguments);
+            runner.LOGOUT += msg + "\n";
+        }
+
+        runner.LOGNOTES = function () {
+            let msg = util.format(...arguments);
+            runner.SUMMARY += msg + "\n";
+        }
+
+        //let BaseConsoleLog = runner.LOG;
+        let BaseConsoleLog = runner.LOGNOTES;
+
         this._indents = 0;
         const stats = runner.stats;
 
@@ -16,35 +36,34 @@ class ZestReporter {
 
         //let Base = new mocha.reporters.Base(runner, options);
 
-        var self = this;
         var indents = 0;
         var n = 0;
 
         function indent() { return Array(indents).join('  '); }
 
-        // runner.on(EVENT_RUN_BEGIN, function () { Base.consoleLog(); });
+        // runner.on(EVENT_RUN_BEGIN, function () { BaseConsoleLog(); });
 
         runner.on(EVENT_SUITE_BEGIN, function (suite) {
             if (suite.file && lastfile != suite.file) {
                 if (1) {
-                    //Base.consoleLog(); // Base.consoleLog();
-                    Base.consoleLog(chalk.yellow(suite.file));
-                    Base.consoleLog();
+                    //BaseConsoleLog(); // BaseConsoleLog();
+                    BaseConsoleLog(chalk.yellow(suite.file));
+                    BaseConsoleLog();
                 }
                 lastfile = suite.file;
             }
             ++indents;
-            Base.consoleLog('%s' + chalk.cyan(suite.title), indent());
+            BaseConsoleLog('%s' + chalk.cyan(suite.title), indent());
         });
 
         runner.on(EVENT_SUITE_END, function () {
             --indents;
-            if (indents === 1) { Base.consoleLog(); }
+            if (indents === 1) { BaseConsoleLog(); }
         });
 
         runner.on(EVENT_TEST_PENDING, function (test) {
             var fmt = indent() + color('pending', '  - %s');
-            Base.consoleLog(fmt, test.title);
+            BaseConsoleLog(fmt, test.title);
         });
 
         runner.on(EVENT_TEST_PASS, function (test) {
@@ -55,19 +74,19 @@ class ZestReporter {
                     indent() +
                     color('checkmark', '  ' + Base.symbols.ok + ' ') +
                     color('suite', ' %s');
-                Base.consoleLog(fmt, test.title);
+                BaseConsoleLog(fmt, test.title);
             } else {
                 fmt =
                     indent() +
                     color('checkmark', '  ' + Base.symbols.ok + ' ') +
                     color('suite', ' %s') +
                     color('suite', ' (%dms)');
-                Base.consoleLog(fmt, test.title, test.duration);
+                BaseConsoleLog(fmt, test.title, test.duration);
             }
         });
 
         runner.on(EVENT_TEST_FAIL, function (test) {
-            Base.consoleLog(indent() + color('fail', '  %d ') + ' %s', ++n, test.title);
+            BaseConsoleLog(indent() + color('fail', '  %d ') + ' %s', ++n, test.title);
         });
 
         // runner.once(EVENT_RUN_END, self.epilogue.bind(self));
@@ -75,9 +94,9 @@ class ZestReporter {
             //console.log({ S: this.stats }); console.log();
             //console.log(this.stats.tests + ':' + chalk.green(this.stats.passes) + '/' + chalk.red(this.stats.failures));
             //console.log()
-            console.log(chalk.yellow('# ' + this.stats.tests + ' TESTS SUMMARY # ')); // + this.stats.tests + ':' + chalk.green(this.stats.passes) + '/' + chalk.white(this.stats.failures));
-            self.epilogue();
-            //console.log(chalk.yellow('# ' + this.stats.tests + ' TESTS SUMMARY # '));
+            BaseConsoleLog(chalk.yellow('# ' + this.stats.tests + ' TESTS SUMMARY # ')); // + this.stats.tests + ':' + chalk.green(this.stats.passes) + '/' + chalk.white(this.stats.failures));
+            self.epilogue(runner);
+            //self.LOGNOTES('NOTES');
         });
 
     }
@@ -87,8 +106,7 @@ class ZestReporter {
     decreaseIndent() { this._indents--; }
 }
 
-mocha.utils.inherits(ZestReporter, mocha.reporters.Base);
-
-//
+//mocha.utils.inherits(ZestReporter, mocha.reporters.Base);
+mocha.utils.inherits(ZestReporter, require('./base'));
 
 module.exports = ZestReporter;

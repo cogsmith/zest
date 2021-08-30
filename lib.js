@@ -11,6 +11,7 @@ const LOG = XT.LOG;
 const NODE = {};
 NODE.fs = require('fs');
 NODE.http = require('http');
+NODE.path = require('path'); const nodepath = NODE.path;
 
 const LIBS = {};
 LIBS.mocha = require('mocha'); const mocha = LIBS.mocha;
@@ -224,9 +225,15 @@ Zest.DoTest = function (testlist) {
     let mocha = new LIBS.mocha({ reporter: 'spec', ui: 'bdd', timeout: 10000 });
     mocha.reporter(require('./reporters/full'));
 
+    //console.error(require.cache);
+
     for (let js of testlist) {
         if (js[0] != '.' && js[0] != '/' && !js.includes(':')) { js = './' + js; }
-        try { delete require.cache[require.resolve(js.replace('.js', ''))]; } catch (ex) { console.error(ex); }
+        //console.log(require.resolve(js.replace('.js', '')));
+        try {
+            let module = nodepath.join(process.cwd(), js.replace('.js', ''));
+            delete require.cache[require.resolve(module)];
+        } catch (ex) { console.error(ex); }
         mocha.addFile(js);
     }
 
@@ -250,7 +257,6 @@ Zest.DoTest = function (testlist) {
     });
 
     Zest.UI.Head.focus();
-    setInterval(() => { try { Zest.UI.Head.focus(); } catch (ex) { } }, 100);
     setTimeout(() => { Zest.TestRunning = false; Zest.UI.Head.focus(); }, 250);
 }
 

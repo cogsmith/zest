@@ -129,9 +129,9 @@ Zest.InitUI = function () {
     let items = ['[ ALL TESTS ]', ...list];
     Zest.Layout = new blessedx.grid({ hideBorders: true, rows: 10, cols: 10, screen: screen });
     const grid = Zest.Layout;
-    const head = grid.set(0, 0, 2, 3, blessed.list, { interactive: true, keys: true, style, items });
-    const foot = grid.set(2, 0, 8, 3, blessed.box, { content: '' });
-    const body = grid.set(0, 3, 10, 7, blessed.box, { style: { bg: '#111111' }, content: '' });
+    const head = grid.set(0, 0, 2, 4, blessed.list, { interactive: true, keys: true, style, items });
+    const foot = grid.set(2, 0, 8, 4, blessed.box, { content: '' });
+    const body = grid.set(0, 4, 10, 6, blessed.box, { style: { bg: '#111111' }, content: '' });
     head.focus();
     head.on('select', (z, i) => {
         if (Zest.TestRunning) { return; }

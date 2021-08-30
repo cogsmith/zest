@@ -209,8 +209,8 @@ Zest.GetTestList = function (arglist) {
 }
 
 Zest.DoTest = function (testlist) {
-    //if (testlist == 0 || testlist == '0') { testlist = Zest.TestList; }
-    if (testlist == 0 || testlist == '0') { testlist = Zest.GetTestList([process.cwd() + '/' + 'test']); }
+    if (testlist == 0 || testlist == '0') { testlist = Zest.TestList; }
+    //if (testlist == 0 || testlist == '0') { testlist = Zest.GetTestList([process.cwd() + '/' + 'test']); }
     if (!Array.isArray(testlist)) { testlist = [testlist]; }
     if (NODE.fs.lstatSync(testlist[0]).isDirectory()) { testlist = Zest.GetTestList(testlist); }
 

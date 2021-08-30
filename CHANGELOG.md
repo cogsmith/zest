@@ -1,5 +1,15 @@
 <code>
 
+# [0.0.24](https://github.com/cogsmith/zest/compare/0.0.24...main) @ [2021-08-29](https://github.com/cogsmith/zest/releases/tag/0.0.24) 
+
+## DIFF
+- [2 COMMITS SINCE LAST TAG = 0.0.23](https://github.com/cogsmith/zest/compare/0.0.23...0.0.24)
+
+</code>
+
+---
+<code>
+
 # [0.0.23](https://github.com/cogsmith/zest/compare/0.0.23...main) @ [2021-08-29](https://github.com/cogsmith/zest/releases/tag/0.0.23) 
 
 ## DIFF

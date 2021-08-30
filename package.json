@@ -1,6 +1,6 @@
 {
-  "version": "0.0.29-dev",
-  "versiontaglast": "0.0.28",
+  "version": "0.0.29",
+  "versiontaglast": "0.0.29",
   "name": "@cogsmith/zest",
   "nametag": "ZEST",
   "namelong": "ZEST",

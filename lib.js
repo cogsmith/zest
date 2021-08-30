@@ -221,7 +221,7 @@ Zest.DoTest = function (testlist) {
     mocha.reporter(require('./reporters/full'));
 
     for (let js of testlist) {
-        if (js[0] != '.' && !js.includes(':')) { js = './' + js; }
+        if (js[0] != '.' && js[0] != '/' && !js.includes(':')) { js = './' + js; }
         try { delete require.cache[require.resolve(js.replace('.js', ''))]; } catch (ex) { }
         mocha.addFile(js);
     }
